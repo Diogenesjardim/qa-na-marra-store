@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meus Pedidos — QA na Marra Store</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
+    <span id="navUser"></span>
+    <a href="login.html" id="navLogin">Entrar</a>
+    <a href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
+  </div>
+</nav>
+
+<div class="orders-page">
+  <h1>📦 Meus Pedidos</h1>
+  <!-- BUG: exibe todos os pedidos do sistema, não só do usuário logado -->
+  <p style="color:var(--text2);font-size:13px;margin-bottom:24px">
+    Acompanhe o status dos seus pedidos
+  </p>
+  <div id="userOrders"></div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  updateCartCount();
+  updateNav();
+  renderUserOrders();
+</script>
+</body>
+</html>

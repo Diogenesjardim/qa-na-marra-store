@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — QA na Marra Store</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- BUG de segurança: painel admin acessível sem verificar se usuário é admin -->
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <a href="index.html" class="logo">QA <span>na Marra</span></a>
+    <nav class="admin-nav">
+      <a href="admin.html" class="active" onclick="showSection('dashboard')">📊 Dashboard</a>
+      <a href="#" onclick="showSection('products')">📦 Produtos</a>
+      <a href="#" onclick="showSection('orders')">🧾 Pedidos</a>
+      <a href="#" onclick="showSection('users')">👥 Usuários</a>
+      <a href="index.html" style="margin-top:auto;color:var(--accent2)">← Voltar à loja</a>
+    </nav>
+  </aside>
+
+  <main class="admin-content">
+
+    <!-- DASHBOARD -->
+    <div id="sectionDashboard">
+      <h1>Dashboard</h1>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="statOrders">-</div>
+          <div class="stat-label">Total de Pedidos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statProducts">-</div>
+          <div class="stat-label">Produtos Cadastrados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statUsers">-</div>
+          <div class="stat-label">Usuários</div>
+        </div>
+        <div class="stat-card">
+          <!-- BUG: receita soma pedidos cancelados também -->
+          <div class="stat-value" id="statRevenue">-</div>
+          <div class="stat-label">Receita Total</div>
+        </div>
+      </div>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:16px">Pedidos Recentes</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="recentOrders"></tbody>
+      </table>
+    </div>
+
+    <!-- PRODUTOS -->
+    <div id="sectionProducts" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h1 style="margin:0">Produtos</h1>
+        <button class="btn-primary" onclick="document.getElementById('addProductModal').style.display='flex'">
+          + Adicionar Produto
+        </button>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="adminProductsList"></tbody>
+      </table>
+    </div>
+
+    <!-- PEDIDOS -->
+    <div id="sectionOrders" style="display:none">
+      <h1>Pedidos</h1>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="adminOrdersList"></tbody>
+      </table>
+    </div>
+
+    <!-- USUÁRIOS -->
+    <div id="sectionUsers" style="display:none">
+      <h1>Usuários</h1>
+      <!-- BUG de segurança: exibe senhas dos usuários em texto claro -->
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Senha</th>
+            <th>Perfil</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersList"></tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal Editar Produto -->
+<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
+  <div class="form-card" style="max-width:480px;width:100%">
+    <h2>Editar Produto</h2>
+    <p>BUG: campos não carregam os dados do produto selecionado</p>
+    <div class="form-group"><label>Nome</label><input type="text" placeholder="Nome do produto"/></div>
+    <div class="form-group"><label>Preço</label>
+      <!-- BUG: aceita preço negativo -->
+      <input type="number" placeholder="Preço (pode ser negativo)"/>
+    </div>
+    <div class="form-group"><label>Estoque</label><input type="number" placeholder="Qtd em estoque"/></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn-primary" style="flex:1" onclick="showToast('Salvo! (bug: nada foi realmente salvo)')">Salvar</button>
+      <button class="btn-ghost" style="flex:1" onclick="document.getElementById('editModal').style.display='none'">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Adicionar Produto -->
+<div id="addProductModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
+  <div class="form-card" style="max-width:480px;width:100%">
+    <h2>Novo Produto</h2>
+    <div class="form-group"><label>Nome</label><input type="text" id="newName" placeholder="Nome do produto"/></div>
+    <div class="form-group"><label>Preço</label><input type="number" id="newPrice" placeholder="0.00"/></div>
+    <div class="form-group"><label>Estoque</label><input type="number" id="newStock" placeholder="0"/></div>
+    <div class="form-group">
+      <label>Categoria</label>
+      <select id="newCat" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
+        <option value="eletronicos">Eletrônicos</option>
+        <option value="roupas">Roupas</option>
+        <option value="livros">Livros</option>
+        <option value="casa">Casa</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn-primary" style="flex:1" onclick="addNewProduct()">Adicionar</button>
+      <button class="btn-ghost" style="flex:1" onclick="document.getElementById('addProductModal').style.display='none'">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  // BUG: não verifica se o usuário logado tem perfil admin
+  // Qualquer pessoa que acessar /admin.html verá o painel
+
+  renderAdminDashboard();
+
+  function showSection(section) {
+    ['dashboard','products','orders','users'].forEach(s => {
+      document.getElementById(`section${s.charAt(0).toUpperCase()+s.slice(1)}`).style.display = 'none';
+    });
+    document.getElementById(`section${section.charAt(0).toUpperCase()+section.slice(1)}`).style.display = 'block';
+
+    // Atualiza nav ativa
+    document.querySelectorAll('.admin-nav a').forEach(a => a.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (section === 'products') renderAdminProducts();
+    if (section === 'orders') renderAdminOrders();
+    if (section === 'users') renderAdminUsers();
+  }
+
+  function renderAdminUsers() {
+    const users = getUsers();
+    const tbody = document.getElementById('adminUsersList');
+    if (!tbody) return;
+    // BUG: exibe senha em texto claro
+    tbody.innerHTML = users.map(u => `
+      <tr>
+        <td>${u.name}</td>
+        <td>${u.email}</td>
+        <td style="color:var(--accent2)">${u.password}</td>
+        <td><span class="badge ${u.role === 'admin' ? 'badge-green' : 'badge-yellow'}">${u.role}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  function addNewProduct() {
+    const name = document.getElementById('newName').value;
+    const price = parseFloat(document.getElementById('newPrice').value);
+    const stock = parseInt(document.getElementById('newStock').value) || 0;
+    const category = document.getElementById('newCat').value;
+
+    if (!name) { showToast('❌ Nome obrigatório'); return; }
+
+    const products = getProducts();
+    const newId = Math.max(...products.map(p => p.id)) + 1;
+    products.push({
+      id: newId, name, price, stock, category,
+      emoji: '📦', description: 'Produto adicionado via admin',
+      featured: false, rating: 0, oldPrice: null
+    });
+    localStorage.setItem('qa_products', JSON.stringify(products));
+    document.getElementById('addProductModal').style.display = 'none';
+    renderAdminProducts();
+    showSection('products');
+    showToast(`✅ Produto "${name}" adicionado!`);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedido Confirmado — QA na Marra Store</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="produtos.html">Produtos</a>
+  </div>
+</nav>
+
+<div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:48px">
+  <div style="text-align:center;max-width:480px">
+    <div style="font-size:4rem;margin-bottom:20px">🎉</div>
+    <h1 style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:12px">
+      Pedido Confirmado!
+    </h1>
+    <!-- BUG: não mostra o número do pedido (fluxo quebrado, não recebe o ID) -->
+    <p style="color:var(--text2);margin-bottom:8px">
+      Seu pedido foi recebido e está sendo processado.
+    </p>
+    <p style="color:var(--text2);font-size:13px;margin-bottom:32px">
+      Número do pedido: <strong style="color:var(--accent2)">Indisponível</strong>
+      <!-- BUG: deveria mostrar o número do pedido mas não consegue recuperar -->
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="pedidos.html" class="btn-primary">Ver Meus Pedidos</a>
+      <a href="index.html" class="btn-ghost">Continuar Comprando</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

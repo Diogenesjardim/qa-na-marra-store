@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QA na Marra Store</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
+    <span id="navUser"></span>
+    <a href="login.html" id="navLogin">Entrar</a>
+    <a href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">🐛 Encontre os bugs. Melhore a qualidade.</p>
+    <h1>A loja onde <em>testar</em><br/>é o objetivo</h1>
+    <p class="hero-sub">Ambiente criado especialmente para praticar testes manuais e automatizados. Explore, quebre, reporte.</p>
+    <div class="hero-actions">
+      <a href="produtos.html" class="btn-primary">Ver Produtos</a>
+      <a href="sobre.html" class="btn-ghost">Como funciona</a>
+    </div>
+    <div class="hero-badges">
+      <span>🔍 Testes Manuais</span>
+      <span>🤖 Robot Framework</span>
+      <span>🐛 Bugs Reais</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="bug-card">
+      <div class="bug-header">BUG REPORT #001</div>
+      <div class="bug-body">
+        <p><strong>Título:</strong> Desconto calculado incorretamente</p>
+        <p><strong>Severidade:</strong> <span class="sev-high">Alta</span></p>
+        <p><strong>Passos:</strong> Adicionar 3+ itens ao carrinho</p>
+        <p><strong>Resultado:</strong> Desconto não é aplicado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section class="section categories-section">
+  <h2>Categorias</h2>
+  <div class="categories-grid">
+    <a href="produtos.html?cat=eletronicos" class="cat-card">
+      <span class="cat-icon">📱</span>
+      <span>Eletrônicos</span>
+    </a>
+    <a href="produtos.html?cat=roupas" class="cat-card">
+      <span class="cat-icon">👕</span>
+      <span>Roupas</span>
+    </a>
+    <a href="produtos.html?cat=livros" class="cat-card">
+      <span class="cat-icon">📚</span>
+      <span>Livros</span>
+    </a>
+    <a href="produtos.html?cat=casa" class="cat-card">
+      <span class="cat-icon">🏠</span>
+      <span>Casa</span>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUTOS EM DESTAQUE -->
+<section class="section">
+  <h2>Produtos em Destaque</h2>
+  <div class="products-grid" id="featuredProducts"></div>
+</section>
+
+<!-- BANNER PROMOÇÃO (bug visual aqui) -->
+<section class="promo-banner">
+  <div class="promo-inner">
+    <h3>SUPER PROMOÇÃO</h3>
+    <!-- BUG: texto cortado e botão fora do lugar -->
+    <p>Aproveite desconto de 50% em toda a loj</p>
+    <a href="produtos.html" class="btn-promo" style="margin-top:-20px; margin-left:200px;">Ver ofertas</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>QA na Marra Store</strong>
+      <p>Ambiente de prática para QAs</p>
+    </div>
+    <div>
+      <strong>Links</strong>
+      <a href="produtos.html">Produtos</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+    </div>
+    <div>
+      <strong>Conta</strong>
+      <a href="login.html">Login</a>
+      <a href="cadastro.html">Cadastro</a>
+      <a href="pedidos.html">Meus Pedidos</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2024 QA na Marra — Ambiente de testes educacional</p>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  renderFeaturedProducts();
+  updateCartCount();
+  updateNav();
+</script>
+</body>
+</html>

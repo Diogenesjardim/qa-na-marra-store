@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produtos — QA na Marra Store</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
+    <span id="navUser"></span>
+    <a href="login.html" id="navLogin">Entrar</a>
+    <a href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Produtos</h1>
+  <p>Explore nosso catálogo completo</p>
+</div>
+
+<div class="section">
+  <!-- Filtros de categoria -->
+  <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+    <a href="produtos.html" class="btn-ghost" style="padding:8px 16px;font-size:13px">Todos</a>
+    <a href="produtos.html?cat=eletronicos" class="btn-ghost" style="padding:8px 16px;font-size:13px">📱 Eletrônicos</a>
+    <a href="produtos.html?cat=roupas" class="btn-ghost" style="padding:8px 16px;font-size:13px">👕 Roupas</a>
+    <a href="produtos.html?cat=livros" class="btn-ghost" style="padding:8px 16px;font-size:13px">📚 Livros</a>
+    <a href="produtos.html?cat=casa" class="btn-ghost" style="padding:8px 16px;font-size:13px">🏠 Casa</a>
+  </div>
+
+  <!-- Barra de busca -->
+  <!-- BUG: busca não tem validação de input, aceita caracteres especiais e scripts -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Buscar produtos... (ex: notebook, livro, camiseta)"/>
+    <button onclick="doSearch()">Buscar</button>
+  </div>
+
+  <!-- BUG: ordenação existe mas não funciona (nenhum dos critérios ordena de fato) -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <span id="productCount" style="font-size:13px;color:var(--text2)"></span>
+    <select id="sortSelect" onchange="doSearch()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:13px">
+      <option value="">Ordenar por</option>
+      <option value="price-asc">Menor preço</option>
+      <option value="price-desc">Maior preço</option>
+      <option value="name">Nome A-Z</option>
+      <option value="rating">Melhor avaliação</option>
+    </select>
+  </div>
+
+  <div class="products-grid" id="allProducts"></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>QA na Marra Store</strong>
+      <p>Ambiente de prática para QAs</p>
+    </div>
+    <div>
+      <strong>Links</strong>
+      <a href="produtos.html">Produtos</a>
+      <a href="sobre.html">Sobre</a>
+    </div>
+    <div>
+      <strong>Conta</strong>
+      <a href="login.html">Login</a>
+      <a href="pedidos.html">Meus Pedidos</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2024 QA na Marra — Ambiente de testes educacional</p>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  updateCartCount();
+  updateNav();
+  doSearch();
+
+  function doSearch() {
+    const filter = document.getElementById('searchInput').value;
+    renderAllProducts(filter);
+
+    // Atualiza contagem (mas não aplica ordenação - bug proposital)
+    const products = getProducts();
+    document.getElementById('productCount').textContent =
+      `${document.querySelectorAll('.product-card').length} produtos encontrados`;
+  }
+
+  document.getElementById('searchInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') doSearch();
+  });
+</script>
+</body>
+</html>
