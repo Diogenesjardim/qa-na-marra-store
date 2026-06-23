@@ -21,3 +21,6 @@ Thumbs.db
 # Arquivos de configuração locais
 .env
 .env.local
+
+# Documentação exclusiva do professor
+docs/GABARITO_BUGS_PROFESSOR.md
