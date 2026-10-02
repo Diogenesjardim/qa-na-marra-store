@@ -1,9 +1,11 @@
 /* ===== TOKENS ===== */
 :root {
-  --bg: #0f0f0f;
+  --bg: #0a0a0f;
   --bg2: #181818;
   --bg3: #222222;
-  --accent: #00e5a0;
+  --accent: #10B981;
+  --purple: #7C3AED;
+  --blue: #3B82F6;
   --accent2: #ff4757;
   --text: #f0f0f0;
   --text2: #aaaaaa;
@@ -33,7 +35,7 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   align-items: center;
   padding: 16px 48px;
-  background: rgba(15,15,15,0.95);
+  background: rgba(10,10,15,0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -48,6 +50,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.5px;
 }
 .logo span { color: var(--accent); }
+.logo-icon { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; position: relative; top: -2px; }
 
 .nav-links {
   display: flex;
@@ -176,7 +179,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius);
   overflow: hidden;
   font-size: 13px;
-  box-shadow: 0 0 40px rgba(0,229,160,0.08);
+  box-shadow: 0 0 40px rgba(16,185,129,0.08);
 }
 .bug-header {
   background: var(--accent2);
@@ -438,8 +441,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .form-success {
-  background: rgba(0,229,160,0.1);
-  border: 1px solid rgba(0,229,160,0.3);
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
   color: var(--accent);
   padding: 10px 14px;
   border-radius: var(--radius-sm);
@@ -709,7 +712,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 11px;
   font-weight: 600;
 }
-.badge-green { background: rgba(0,229,160,0.15); color: var(--accent); }
+.badge-green { background: rgba(16,185,129,0.15); color: var(--accent); }
 .badge-red { background: rgba(255,71,87,0.15); color: var(--accent2); }
 .badge-yellow { background: rgba(255,215,0,0.15); color: #ffd700; }
 

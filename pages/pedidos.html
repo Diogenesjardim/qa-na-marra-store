@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meus Pedidos — QA na Marra Store</title>
+  <title>Meus Pedidos — Code Flow Store</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar">
-  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <a data-testid="nav-logo" href="index.html" class="logo"><img class="logo-icon" src="../img/logo.svg" alt=""/>Code <span>Flow</span> Store</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
-    <span id="navUser"></span>
-    <a href="login.html" id="navLogin">Entrar</a>
-    <a href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
+    <a data-testid="nav-home" href="index.html">Home</a>
+    <a data-testid="nav-products" href="produtos.html">Produtos</a>
+    <a data-testid="nav-cart" href="carrinho.html" class="cart-link">🛒 Carrinho <span data-testid="cart-count" class="cart-count" id="cartCount">0</span></a>
+    <span data-testid="nav-user-name" id="navUser"></span>
+    <a data-testid="nav-login" href="login.html" id="navLogin">Entrar</a>
+    <a data-testid="nav-logout" href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
   </div>
 </nav>
 
@@ -26,7 +26,7 @@
   <p style="color:var(--text2);font-size:13px;margin-bottom:24px">
     Acompanhe o status dos seus pedidos
   </p>
-  <div id="userOrders"></div>
+  <div data-testid="orders-list" id="userOrders"></div>
 </div>
 
 <script src="../js/data.js"></script>

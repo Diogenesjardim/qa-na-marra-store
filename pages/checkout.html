@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout — QA na Marra Store</title>
+  <title>Checkout — Code Flow Store</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar">
-  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <a data-testid="nav-logo" href="index.html" class="logo"><img class="logo-icon" src="../img/logo.svg" alt=""/>Code <span>Flow</span> Store</a>
   <div class="nav-links">
-    <a href="carrinho.html" class="cart-link">🛒 Voltar ao Carrinho</a>
+    <a data-testid="nav-back-to-cart" href="carrinho.html" class="cart-link">🛒 Voltar ao Carrinho</a>
   </div>
 </nav>
 
@@ -27,33 +27,33 @@
     <div class="form-group">
       <label>CEP</label>
       <!-- BUG: campo CEP aceita qualquer texto, não busca endereço automaticamente -->
-      <input type="text" id="cep" placeholder="00000-000" maxlength="9"/>
+      <input data-testid="checkout-cep" type="text" id="cep" placeholder="00000-000" maxlength="9"/>
     </div>
 
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px">
       <div class="form-group">
         <label>Rua</label>
-        <input type="text" id="rua" placeholder="Nome da rua"/>
+        <input data-testid="checkout-street" type="text" id="rua" placeholder="Nome da rua"/>
       </div>
       <div class="form-group">
         <label>Número</label>
-        <input type="text" id="numero" placeholder="123"/>
+        <input data-testid="checkout-number" type="text" id="numero" placeholder="123"/>
       </div>
     </div>
 
     <div class="form-group">
       <label>Complemento</label>
-      <input type="text" id="complemento" placeholder="Apto, Bloco..."/>
+      <input data-testid="checkout-complement" type="text" id="complemento" placeholder="Apto, Bloco..."/>
     </div>
 
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px">
       <div class="form-group">
         <label>Cidade</label>
-        <input type="text" id="cidade" placeholder="São Paulo"/>
+        <input data-testid="checkout-city" type="text" id="cidade" placeholder="São Paulo"/>
       </div>
       <div class="form-group">
         <label>Estado</label>
-        <select id="estado" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
+        <select data-testid="checkout-state" id="estado" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
           <option value="">UF</option>
           <option>SP</option><option>RJ</option><option>MG</option>
           <option>RS</option><option>PR</option><option>SC</option>
@@ -67,7 +67,7 @@
 
     <div class="form-group">
       <label>Forma de Pagamento</label>
-      <select id="pagamento" onchange="togglePayment(this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
+      <select data-testid="checkout-payment-method" id="pagamento" onchange="togglePayment(this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
         <option value="">Selecione...</option>
         <option value="cartao">Cartão de Crédito</option>
         <option value="pix">PIX</option>
@@ -76,48 +76,48 @@
     </div>
 
     <!-- Campos de cartão -->
-    <div id="cartaoFields" style="display:none">
+    <div data-testid="checkout-card-fields" id="cartaoFields" style="display:none">
       <div class="form-group">
         <label>Número do Cartão</label>
         <!-- BUG: aceita qualquer número sem validação de Luhn -->
-        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000"/>
+        <input data-testid="checkout-card-number" type="text" id="cardNumber" placeholder="0000 0000 0000 0000"/>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="form-group">
           <label>Validade</label>
           <!-- BUG: aceita datas expiradas -->
-          <input type="text" id="cardExpiry" placeholder="MM/AA"/>
+          <input data-testid="checkout-card-expiry" type="text" id="cardExpiry" placeholder="MM/AA"/>
         </div>
         <div class="form-group">
           <label>CVV</label>
-          <input type="text" id="cardCvv" placeholder="123" maxlength="4"/>
+          <input data-testid="checkout-card-cvv" type="text" id="cardCvv" placeholder="123" maxlength="4"/>
         </div>
       </div>
       <div class="form-group">
         <label>Nome no Cartão</label>
-        <input type="text" id="cardName" placeholder="NOME SOBRENOME"/>
+        <input data-testid="checkout-card-name" type="text" id="cardName" placeholder="NOME SOBRENOME"/>
       </div>
     </div>
 
     <!-- PIX -->
-    <div id="pixFields" style="display:none;padding:20px;background:var(--bg3);border-radius:8px;text-align:center">
+    <div data-testid="checkout-pix-info" id="pixFields" style="display:none;padding:20px;background:var(--bg3);border-radius:8px;text-align:center">
       <div style="font-size:3rem;margin-bottom:12px">📱</div>
       <p style="font-size:14px;color:var(--text2)">Após confirmar, você receberá o QR Code do PIX</p>
     </div>
 
     <!-- Boleto -->
-    <div id="boletoFields" style="display:none;padding:20px;background:var(--bg3);border-radius:8px;text-align:center">
+    <div data-testid="checkout-boleto-info" id="boletoFields" style="display:none;padding:20px;background:var(--bg3);border-radius:8px;text-align:center">
       <div style="font-size:3rem;margin-bottom:12px">📄</div>
       <p style="font-size:14px;color:var(--text2)">Boleto vence em 3 dias úteis. Prazo de compensação: 2 dias úteis.</p>
     </div>
 
     <!-- BUG: botão some em telas menores por causa do CSS (overflow:hidden no pai) -->
-    <button class="btn-primary" style="width:100%;margin-top:24px;padding:16px" onclick="handleCheckout()">
+    <button data-testid="checkout-submit" class="btn-primary" style="width:100%;margin-top:24px;padding:16px" onclick="handleCheckout()">
       ✅ Confirmar Pedido
     </button>
   </div>
 
-  <div class="checkout-summary" id="checkoutSummary">
+  <div data-testid="checkout-summary" class="checkout-summary" id="checkoutSummary">
     <h3>Carregando...</h3>
   </div>
 </div>

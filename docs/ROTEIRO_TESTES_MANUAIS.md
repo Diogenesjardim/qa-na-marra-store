@@ -1,12 +1,12 @@
 # 📋 ROTEIRO DE TESTES MANUAIS
-## QA na Marra Store — Curso QA na Marra
+## Code Flow Store — Curso Code Flow Mentoria
 ### Módulo: Testes Manuais para Iniciantes
 
 ---
 
 ## 🎯 OBJETIVO
 
-Este roteiro vai te guiar pelos principais fluxos do sistema **QA na Marra Store**.  
+Este roteiro vai te guiar pelos principais fluxos do sistema **Code Flow Store**.  
 Sua missão é: **testar cada funcionalidade, encontrar os bugs e documentá-los corretamente.**
 
 > 💡 **Dica do instrutor:** O sistema possui bugs propositais escondidos. Alguns são fáceis de achar, outros exigem atenção. Não desanime — um bom QA é curioso e persistente!
@@ -22,7 +22,7 @@ Sua missão é: **testar cada funcionalidade, encontrar os bugs e documentá-los
 
 | Perfil | E-mail | Senha |
 |--------|--------|-------|
-| Administrador | admin@qanamarrastore.com | admin123 |
+| Administrador | admin@codeflowmentoria.com | admin123 |
 | Usuário comum | aluno@teste.com | senha123 |
 
 ### O que você vai precisar
@@ -76,7 +76,7 @@ Sua missão é: **testar cada funcionalidade, encontrar os bugs e documentá-los
 | 2 | Clicar em "Produtos" | Abre a listagem de produtos |
 | 3 | Clicar em "Carrinho" | Abre a página do carrinho |
 | 4 | Clicar em "Entrar" | Abre a página de login |
-| 5 | Clicar no logo "QA na Marra Store" | Volta para a Home |
+| 5 | Clicar no logo "Code Flow Store" | Volta para a Home |
 
 ---
 
@@ -242,7 +242,7 @@ Sua missão é: **testar cada funcionalidade, encontrar os bugs e documentá-los
 
 | Passo | Ação | Resultado Esperado |
 |-------|------|--------------------|
-| 1 | Preencher E-mail: "admin@qanamarrastore.com" | Campo aceita |
+| 1 | Preencher E-mail: "admin@codeflowmentoria.com" | Campo aceita |
 | 2 | Preencher Senha: "admin123" | Campo aceita |
 | 3 | Clicar em "Entrar" | Redirecionado para admin.html |
 | 4 | Verificar o painel admin | Dashboard com estatísticas visíveis |
@@ -428,7 +428,7 @@ Sua missão é: **testar cada funcionalidade, encontrar os bugs e documentá-los
 |-------|------|--------------------|
 | 1 | Acessar o carrinho | Campo de cupom visível |
 | 2 | Digitar um cupom inválido: "XYZXYZ" | Mensagem de erro: "Cupom inválido" |
-| 3 | Digitar um cupom válido: "QANAMARR10" | Desconto aplicado no total |
+| 3 | Digitar um cupom válido: "CODEFLOW10" | Desconto aplicado no total |
 | 4 | Verificar se o total foi recalculado | Total com desconto do cupom |
 
 **✏️ Anote:** O sistema aceitou um cupom inválido? O desconto foi realmente aplicado?
@@ -671,4 +671,4 @@ Ao terminar os testes, você deve ter:
 
 ---
 
-*QA na Marra — Roteiro de Testes Manuais v1.0*
+*Code Flow Mentoria — Roteiro de Testes Manuais v1.0*

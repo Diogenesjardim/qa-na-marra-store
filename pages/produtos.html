@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Produtos — QA na Marra Store</title>
+  <title>Produtos — Code Flow Store</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar">
-  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <a data-testid="nav-logo" href="index.html" class="logo"><img class="logo-icon" src="../img/logo.svg" alt=""/>Code <span>Flow</span> Store</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
-    <span id="navUser"></span>
-    <a href="login.html" id="navLogin">Entrar</a>
-    <a href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
+    <a data-testid="nav-home" href="index.html">Home</a>
+    <a data-testid="nav-products" href="produtos.html">Produtos</a>
+    <a data-testid="nav-cart" href="carrinho.html" class="cart-link">🛒 Carrinho <span data-testid="cart-count" class="cart-count" id="cartCount">0</span></a>
+    <span data-testid="nav-user-name" id="navUser"></span>
+    <a data-testid="nav-login" href="login.html" id="navLogin">Entrar</a>
+    <a data-testid="nav-logout" href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
   </div>
 </nav>
 
@@ -28,24 +28,24 @@
 <div class="section">
   <!-- Filtros de categoria -->
   <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
-    <a href="produtos.html" class="btn-ghost" style="padding:8px 16px;font-size:13px">Todos</a>
-    <a href="produtos.html?cat=eletronicos" class="btn-ghost" style="padding:8px 16px;font-size:13px">📱 Eletrônicos</a>
-    <a href="produtos.html?cat=roupas" class="btn-ghost" style="padding:8px 16px;font-size:13px">👕 Roupas</a>
-    <a href="produtos.html?cat=livros" class="btn-ghost" style="padding:8px 16px;font-size:13px">📚 Livros</a>
-    <a href="produtos.html?cat=casa" class="btn-ghost" style="padding:8px 16px;font-size:13px">🏠 Casa</a>
+    <a data-testid="filter-all" href="produtos.html" class="btn-ghost" style="padding:8px 16px;font-size:13px">Todos</a>
+    <a data-testid="filter-eletronicos" href="produtos.html?cat=eletronicos" class="btn-ghost" style="padding:8px 16px;font-size:13px">📱 Eletrônicos</a>
+    <a data-testid="filter-roupas" href="produtos.html?cat=roupas" class="btn-ghost" style="padding:8px 16px;font-size:13px">👕 Roupas</a>
+    <a data-testid="filter-livros" href="produtos.html?cat=livros" class="btn-ghost" style="padding:8px 16px;font-size:13px">📚 Livros</a>
+    <a data-testid="filter-casa" href="produtos.html?cat=casa" class="btn-ghost" style="padding:8px 16px;font-size:13px">🏠 Casa</a>
   </div>
 
   <!-- Barra de busca -->
   <!-- BUG: busca não tem validação de input, aceita caracteres especiais e scripts -->
   <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Buscar produtos... (ex: notebook, livro, camiseta)"/>
-    <button onclick="doSearch()">Buscar</button>
+    <input data-testid="search-input" type="text" id="searchInput" placeholder="Buscar produtos... (ex: notebook, livro, camiseta)"/>
+    <button data-testid="search-submit" onclick="doSearch()">Buscar</button>
   </div>
 
   <!-- BUG: ordenação existe mas não funciona (nenhum dos critérios ordena de fato) -->
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-    <span id="productCount" style="font-size:13px;color:var(--text2)"></span>
-    <select id="sortSelect" onchange="doSearch()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:13px">
+    <span data-testid="product-count" id="productCount" style="font-size:13px;color:var(--text2)"></span>
+    <select data-testid="sort-select" id="sortSelect" onchange="doSearch()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:13px">
       <option value="">Ordenar por</option>
       <option value="price-asc">Menor preço</option>
       <option value="price-desc">Maior preço</option>
@@ -54,27 +54,27 @@
     </select>
   </div>
 
-  <div class="products-grid" id="allProducts"></div>
+  <div data-testid="products-grid" class="products-grid" id="allProducts"></div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
     <div>
-      <strong>QA na Marra Store</strong>
-      <p>Ambiente de prática para QAs</p>
+      <strong>Code Flow Store</strong>
+      <p>Aprenda. Teste. Entregue.</p>
     </div>
     <div>
       <strong>Links</strong>
-      <a href="produtos.html">Produtos</a>
-      <a href="sobre.html">Sobre</a>
+      <a data-testid="footer-link-products" href="produtos.html">Produtos</a>
+      <a data-testid="footer-link-about" href="sobre.html">Sobre</a>
     </div>
     <div>
       <strong>Conta</strong>
-      <a href="login.html">Login</a>
-      <a href="pedidos.html">Meus Pedidos</a>
+      <a data-testid="footer-link-login" href="login.html">Login</a>
+      <a data-testid="footer-link-orders" href="pedidos.html">Meus Pedidos</a>
     </div>
   </div>
-  <p class="footer-copy">© 2024 QA na Marra — Ambiente de testes educacional</p>
+  <p class="footer-copy">© 2024 Code Flow Mentoria — Ambiente de testes educacional</p>
 </footer>
 
 <script src="../js/data.js"></script>

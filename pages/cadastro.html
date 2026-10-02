@@ -3,59 +3,59 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Criar Conta — QA na Marra Store</title>
+  <title>Criar Conta — Code Flow Store</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar">
-  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <a data-testid="nav-logo" href="index.html" class="logo"><img class="logo-icon" src="../img/logo.svg" alt=""/>Code <span>Flow</span> Store</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
+    <a data-testid="nav-home" href="index.html">Home</a>
+    <a data-testid="nav-products" href="produtos.html">Produtos</a>
+    <a data-testid="nav-cart" href="carrinho.html" class="cart-link">🛒 Carrinho <span data-testid="cart-count" class="cart-count" id="cartCount">0</span></a>
   </div>
 </nav>
 
 <div class="form-page">
   <div class="form-card">
     <h2>Criar Conta</h2>
-    <p>Junte-se ao QA na Marra Store</p>
+    <p>Junte-se à Code Flow Store</p>
 
-    <div class="form-error" id="registerError"></div>
-    <div class="form-success" id="registerSuccess">Conta criada com sucesso! Redirecionando...</div>
+    <div data-testid="register-error" class="form-error" id="registerError"></div>
+    <div data-testid="register-success" class="form-success" id="registerSuccess">Conta criada com sucesso! Redirecionando...</div>
 
     <div class="form-group">
       <label>Nome completo</label>
-      <input type="text" id="regName" placeholder="Seu nome"/>
+      <input data-testid="register-name" type="text" id="regName" placeholder="Seu nome"/>
     </div>
 
     <div class="form-group">
       <label>E-mail</label>
-      <input type="email" id="regEmail" placeholder="seu@email.com"/>
+      <input data-testid="register-email" type="email" id="regEmail" placeholder="seu@email.com"/>
     </div>
 
     <div class="form-group">
       <label>Senha</label>
-      <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres"/>
+      <input data-testid="register-password" type="password" id="regPassword" placeholder="Mínimo 6 caracteres"/>
     </div>
 
     <div class="form-group">
       <label>Confirmar Senha</label>
       <!-- BUG: confirmar senha existe mas o JS não valida se são iguais -->
-      <input type="password" id="regConfirm" placeholder="Repita a senha"/>
+      <input data-testid="register-confirm-password" type="password" id="regConfirm" placeholder="Repita a senha"/>
     </div>
 
     <!-- BUG: CPF aceita qualquer texto, sem validação de formato -->
     <div class="form-group">
       <label>CPF</label>
-      <input type="text" id="regCpf" placeholder="000.000.000-00"/>
+      <input data-testid="register-cpf" type="text" id="regCpf" placeholder="000.000.000-00"/>
     </div>
 
-    <button class="form-btn" onclick="handleRegister()">Criar Conta</button>
+    <button data-testid="register-submit" class="form-btn" onclick="handleRegister()">Criar Conta</button>
 
     <div class="form-link">
-      Já tem conta? <a href="login.html">Entrar</a>
+      Já tem conta? <a data-testid="register-login-link" href="login.html">Entrar</a>
     </div>
   </div>
 </div>
