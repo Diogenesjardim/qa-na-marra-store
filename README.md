@@ -1,4 +1,4 @@
-# QA na Marra Store
+# Code Flow Store
 
 Ambiente de prática para testes manuais e automatizados. Este projeto foi criado especificamente para estudantes de QA aprenderem e praticarem técnicas de teste em um ambiente com bugs propositalmente inseridos.
 
@@ -72,7 +72,7 @@ c:\files/
 ## 🔐 Credenciais de Teste
 
 ### Administrador
-- **E-mail:** `admin@qanamarrastore.com`
+- **E-mail:** `admin@codeflowmentoria.com`
 - **Senha:** `admin123`
 
 ### Usuário Comum
@@ -107,5 +107,5 @@ Este projeto foi criado para fins educacionais e de treinamento em QA.
 
 ---
 
-**QA na Marra** - Ambiente de testes educacional © 2024
+**Code Flow Mentoria** - Ambiente de testes educacional © 2024
 # deploy

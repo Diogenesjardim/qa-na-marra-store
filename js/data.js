@@ -1,5 +1,5 @@
 // =============================================
-// QA NA MARRA STORE - DADOS DO SISTEMA
+// CODE FLOW STORE - DADOS DO SISTEMA
 // =============================================
 
 const PRODUCTS = [
@@ -189,7 +189,7 @@ function initData() {
   if (!localStorage.getItem('qa_users')) {
     // Usuário admin padrão
     const users = [
-      { name: "Admin", email: "admin@qanamarrastore.com", password: "admin123", role: "admin" },
+      { name: "Admin", email: "admin@codeflowmentoria.com", password: "admin123", role: "admin" },
       { name: "Aluno Teste", email: "aluno@teste.com", password: "senha123", role: "user" }
     ];
     localStorage.setItem('qa_users', JSON.stringify(users));

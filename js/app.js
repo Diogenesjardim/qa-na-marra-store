@@ -1,5 +1,5 @@
 // =============================================
-// QA NA MARRA STORE - FUNÇÕES PRINCIPAIS
+// CODE FLOW STORE - FUNÇÕES PRINCIPAIS
 // =============================================
 
 // ------ CARRINHO ------
@@ -245,7 +245,7 @@ function renderProductDetail() {
     return;
   }
 
-  document.title = `${product.name} — QA na Marra Store`;
+  document.title = `${product.name} — Code Flow Store`;
 
   container.innerHTML = `
     <div data-testid="product-detail" class="product-detail">

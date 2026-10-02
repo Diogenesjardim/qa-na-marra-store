@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carrinho — QA na Marra Store</title>
+  <title>Carrinho — Code Flow Store</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar">
-  <a data-testid="nav-logo" href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <a data-testid="nav-logo" href="index.html" class="logo"><img class="logo-icon" src="../img/logo.svg" alt=""/>Code <span>Flow</span> Store</a>
   <div class="nav-links">
     <a data-testid="nav-home" href="index.html">Home</a>
     <a data-testid="nav-products" href="produtos.html">Produtos</a>
@@ -25,7 +25,7 @@
 
   <!-- BUG: cupom de desconto aceita qualquer código sem validar -->
   <div style="display:flex;gap:10px;margin-bottom:24px">
-    <input data-testid="coupon-input" type="text" id="couponInput" placeholder="Código de cupom (ex: QANAMAARRA10)"
+    <input data-testid="coupon-input" type="text" id="couponInput" placeholder="Código de cupom (ex: CODEFLOW10)"
       style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text);font-size:13px;flex:1;outline:none"/>
     <button data-testid="coupon-apply" onclick="applyCoupon()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:6px;cursor:pointer;font-size:13px">
       Aplicar
