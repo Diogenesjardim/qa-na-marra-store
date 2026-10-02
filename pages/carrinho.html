@@ -23,7 +23,6 @@
 <div class="cart-page">
   <h1>🛒 Meu Carrinho</h1>
 
-  <!-- BUG: cupom de desconto aceita qualquer código sem validar -->
   <div style="display:flex;gap:10px;margin-bottom:24px">
     <input data-testid="coupon-input" type="text" id="couponInput" placeholder="Código de cupom (ex: CODEFLOW10)"
       style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text);font-size:13px;flex:1;outline:none"/>
@@ -44,10 +43,9 @@
   renderCart();
 
   function applyCoupon() {
-    // BUG: aceita qualquer cupom e mostra mensagem de sucesso
     const code = document.getElementById('couponInput').value;
     if (code) {
-      showToast(`✅ Cupom "${code}" aplicado! (bug: nenhum desconto é realmente aplicado)`);
+      showToast(`✅ Cupom "${code}" aplicado!`);
     }
   }
 </script>

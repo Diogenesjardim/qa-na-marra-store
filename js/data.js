@@ -127,7 +127,6 @@ const PRODUCTS = [
     id: 11,
     name: "Teclado Mecânico RGB",
     category: "eletronicos",
-    // BUG: preço negativo permitido - este produto tem preço -50
     price: -50,
     oldPrice: 450.00,
     description: "Teclado mecânico com switches blue, iluminação RGB customizável e layout ABNT2.",
@@ -144,7 +143,7 @@ const PRODUCTS = [
     oldPrice: 229.90,
     description: "Mouse gamer com sensor óptico de alta precisão, 7 botões programáveis e peso ajustável.",
     emoji: "🖱️",
-    stock: 0, // BUG: produto sem estoque aparece disponível para compra
+    stock: 0,
     featured: false,
     rating: 4.5
   }

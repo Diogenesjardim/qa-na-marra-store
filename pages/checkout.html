@@ -26,7 +26,6 @@
 
     <div class="form-group">
       <label>CEP</label>
-      <!-- BUG: campo CEP aceita qualquer texto, não busca endereço automaticamente -->
       <input data-testid="checkout-cep" type="text" id="cep" placeholder="00000-000" maxlength="9"/>
     </div>
 
@@ -79,13 +78,11 @@
     <div data-testid="checkout-card-fields" id="cartaoFields" style="display:none">
       <div class="form-group">
         <label>Número do Cartão</label>
-        <!-- BUG: aceita qualquer número sem validação de Luhn -->
         <input data-testid="checkout-card-number" type="text" id="cardNumber" placeholder="0000 0000 0000 0000"/>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="form-group">
           <label>Validade</label>
-          <!-- BUG: aceita datas expiradas -->
           <input data-testid="checkout-card-expiry" type="text" id="cardExpiry" placeholder="MM/AA"/>
         </div>
         <div class="form-group">
@@ -111,7 +108,6 @@
       <p style="font-size:14px;color:var(--text2)">Boleto vence em 3 dias úteis. Prazo de compensação: 2 dias úteis.</p>
     </div>
 
-    <!-- BUG: botão some em telas menores por causa do CSS (overflow:hidden no pai) -->
     <button data-testid="checkout-submit" class="btn-primary" style="width:100%;margin-top:24px;padding:16px" onclick="handleCheckout()">
       ✅ Confirmar Pedido
     </button>
@@ -145,8 +141,6 @@
       email: ''
     };
 
-    // BUG: não valida se campos obrigatórios foram preenchidos
-    // Pedido é finalizado mesmo com endereço vazio
 
     finalizarPedido(dados);
   }

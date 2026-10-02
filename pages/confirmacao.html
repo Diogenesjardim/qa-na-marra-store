@@ -22,13 +22,11 @@
     <h1 data-testid="confirmation-title" style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:12px">
       Pedido Confirmado!
     </h1>
-    <!-- BUG: não mostra o número do pedido (fluxo quebrado, não recebe o ID) -->
     <p data-testid="confirmation-message" style="color:var(--text2);margin-bottom:8px">
       Seu pedido foi recebido e está sendo processado.
     </p>
     <p style="color:var(--text2);font-size:13px;margin-bottom:32px">
       Número do pedido: <strong data-testid="confirmation-order-number" style="color:var(--accent2)">Indisponível</strong>
-      <!-- BUG: deveria mostrar o número do pedido mas não consegue recuperar -->
     </p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <a data-testid="confirmation-view-orders" href="pedidos.html" class="btn-primary">Ver Meus Pedidos</a>

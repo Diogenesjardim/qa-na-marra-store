@@ -9,7 +9,6 @@
 </head>
 <body>
 
-<!-- BUG de segurança: painel admin acessível sem verificar se usuário é admin -->
 <div class="admin-layout">
   <aside class="admin-sidebar">
     <a href="index.html" class="logo"><img class="logo-icon" src="../img/logo.svg" alt=""/>Code <span>Flow</span></a>
@@ -42,7 +41,6 @@
           <div class="stat-label">Usuários</div>
         </div>
         <div class="stat-card">
-          <!-- BUG: receita soma pedidos cancelados também -->
           <div data-testid="stat-revenue" class="stat-value" id="statRevenue">-</div>
           <div class="stat-label">Receita Total</div>
         </div>
@@ -108,7 +106,6 @@
     <!-- USUÁRIOS -->
     <div data-testid="admin-section-users" id="sectionUsers" style="display:none">
       <h1>Usuários</h1>
-      <!-- BUG de segurança: exibe senhas dos usuários em texto claro -->
       <table class="admin-table">
         <thead>
           <tr>
@@ -129,15 +126,13 @@
 <div data-testid="edit-product-modal" id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
   <div class="form-card" style="max-width:480px;width:100%">
     <h2>Editar Produto</h2>
-    <p>BUG: campos não carregam os dados do produto selecionado</p>
     <div class="form-group"><label>Nome</label><input data-testid="edit-product-name" type="text" placeholder="Nome do produto"/></div>
     <div class="form-group"><label>Preço</label>
-      <!-- BUG: aceita preço negativo -->
-      <input data-testid="edit-product-price" type="number" placeholder="Preço (pode ser negativo)"/>
+      <input data-testid="edit-product-price" type="number" placeholder="Preço"/>
     </div>
     <div class="form-group"><label>Estoque</label><input data-testid="edit-product-stock" type="number" placeholder="Qtd em estoque"/></div>
     <div style="display:flex;gap:10px;margin-top:16px">
-      <button data-testid="edit-product-save" class="btn-primary" style="flex:1" onclick="showToast('Salvo! (bug: nada foi realmente salvo)')">Salvar</button>
+      <button data-testid="edit-product-save" class="btn-primary" style="flex:1" onclick="showToast('Salvo!')">Salvar</button>
       <button data-testid="edit-product-cancel" class="btn-ghost" style="flex:1" onclick="document.getElementById('editModal').style.display='none'">Cancelar</button>
     </div>
   </div>
@@ -169,8 +164,6 @@
 <script src="../js/data.js"></script>
 <script src="../js/app.js"></script>
 <script>
-  // BUG: não verifica se o usuário logado tem perfil admin
-  // Qualquer pessoa que acessar /admin.html verá o painel
 
   renderAdminDashboard();
 
@@ -193,7 +186,6 @@
     const users = getUsers();
     const tbody = document.getElementById('adminUsersList');
     if (!tbody) return;
-    // BUG: exibe senha em texto claro
     tbody.innerHTML = users.map(u => `
       <tr data-testid="admin-user-row">
         <td data-testid="admin-user-name">${u.name}</td>
