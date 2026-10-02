@@ -9,18 +9,18 @@
 </head>
 <body>
 <nav class="navbar">
-  <a href="index.html" class="logo">QA <span>na Marra</span> Store</a>
+  <a data-testid="nav-logo" href="index.html" class="logo">QA <span>na Marra</span> Store</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="carrinho.html" class="cart-link">🛒 Carrinho <span class="cart-count" id="cartCount">0</span></a>
-    <span id="navUser"></span>
-    <a href="login.html" id="navLogin">Entrar</a>
-    <a href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
+    <a data-testid="nav-home" href="index.html">Home</a>
+    <a data-testid="nav-products" href="produtos.html">Produtos</a>
+    <a data-testid="nav-cart" href="carrinho.html" class="cart-link">🛒 Carrinho <span data-testid="cart-count" class="cart-count" id="cartCount">0</span></a>
+    <span data-testid="nav-user-name" id="navUser"></span>
+    <a data-testid="nav-login" href="login.html" id="navLogin">Entrar</a>
+    <a data-testid="nav-logout" href="#" id="navLogout" style="display:none" onclick="logout()">Sair</a>
   </div>
 </nav>
 
-<div id="productDetail"></div>
+<div data-testid="product-detail-container" id="productDetail"></div>
 
 <footer class="footer">
   <p class="footer-copy" style="margin-top:0">© 2024 QA na Marra — Ambiente de testes educacional</p>

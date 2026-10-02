@@ -89,11 +89,11 @@ function renderCart() {
 
   if (cart.length === 0) {
     container.innerHTML = `
-      <div class="empty-state">
+      <div data-testid="cart-empty" class="empty-state">
         <div class="empty-icon">🛒</div>
         <h3>Seu carrinho está vazio</h3>
         <p>Adicione produtos para continuar</p>
-        <a href="produtos.html" class="btn-primary" style="display:inline-block;margin-top:16px">Ver Produtos</a>
+        <a data-testid="cart-empty-browse" href="produtos.html" class="btn-primary" style="display:inline-block;margin-top:16px">Ver Produtos</a>
       </div>
     `;
     if (summaryContainer) summaryContainer.innerHTML = '';
@@ -101,7 +101,7 @@ function renderCart() {
   }
 
   container.innerHTML = `
-    <table class="cart-table">
+    <table data-testid="cart-table" class="cart-table">
       <thead>
         <tr>
           <th>Produto</th>
@@ -113,23 +113,23 @@ function renderCart() {
       </thead>
       <tbody>
         ${cart.map(item => `
-          <tr>
+          <tr data-testid="cart-item-${item.id}">
             <td>
               <div style="display:flex;align-items:center;gap:12px">
                 <span style="font-size:1.5rem">${item.emoji}</span>
-                <span class="cart-item-name">${item.name}</span>
+                <span data-testid="cart-item-name" class="cart-item-name">${item.name}</span>
               </div>
             </td>
-            <td class="cart-item-price">R$ ${item.price.toFixed(2)}</td>
+            <td data-testid="cart-item-price" class="cart-item-price">R$ ${item.price.toFixed(2)}</td>
             <td>
               <div class="qty-control">
-                <button class="qty-btn" onclick="updateQty(${item.id}, ${item.qty - 1})">−</button>
-                <span>${item.qty}</span>
-                <button class="qty-btn" onclick="updateQty(${item.id}, ${item.qty + 1})">+</button>
+                <button data-testid="cart-item-qty-decrease" class="qty-btn" onclick="updateQty(${item.id}, ${item.qty - 1})">−</button>
+                <span data-testid="cart-item-qty">${item.qty}</span>
+                <button data-testid="cart-item-qty-increase" class="qty-btn" onclick="updateQty(${item.id}, ${item.qty + 1})">+</button>
               </div>
             </td>
-            <td class="cart-item-price">R$ ${(item.price * item.qty).toFixed(2)}</td>
-            <td><button class="btn-remove" onclick="removeFromCart(${item.id})">🗑️</button></td>
+            <td data-testid="cart-item-subtotal" class="cart-item-price">R$ ${(item.price * item.qty).toFixed(2)}</td>
+            <td><button data-testid="cart-item-remove" class="btn-remove" onclick="removeFromCart(${item.id})">🗑️</button></td>
           </tr>
         `).join('')}
       </tbody>
@@ -143,23 +143,23 @@ function renderCart() {
       <div class="cart-summary">
         <div class="cart-summary-row">
           <span>Subtotal</span>
-          <span>R$ ${subtotal.toFixed(2)}</span>
+          <span data-testid="cart-subtotal">R$ ${subtotal.toFixed(2)}</span>
         </div>
         ${discount > 0 ? `
           <div class="cart-summary-row" style="color:var(--accent)">
             <span>Desconto</span>
-            <span>− R$ ${discount.toFixed(2)}</span>
+            <span data-testid="cart-discount">− R$ ${discount.toFixed(2)}</span>
           </div>
         ` : ''}
         <div class="cart-summary-row">
           <span>Frete</span>
-          <span>${shipping === 0 ? '<span style="color:var(--accent)">Grátis</span>' : 'R$ ' + shipping.toFixed(2)}</span>
+          <span data-testid="cart-shipping">${shipping === 0 ? '<span style="color:var(--accent)">Grátis</span>' : 'R$ ' + shipping.toFixed(2)}</span>
         </div>
         <div class="cart-summary-row total">
           <span>Total</span>
-          <span>R$ ${total.toFixed(2)}</span>
+          <span data-testid="cart-total">R$ ${total.toFixed(2)}</span>
         </div>
-        <a href="checkout.html" class="btn-primary" style="display:block;text-align:center;margin-top:20px">
+        <a data-testid="cart-checkout-btn" href="checkout.html" class="btn-primary" style="display:block;text-align:center;margin-top:20px">
           Finalizar Compra
         </a>
       </div>
@@ -199,7 +199,7 @@ function renderAllProducts(filter = '') {
 
   if (products.length === 0) {
     container.innerHTML = `
-      <div class="empty-state" style="grid-column:1/-1">
+      <div data-testid="products-empty" class="empty-state" style="grid-column:1/-1">
         <div class="empty-icon">🔍</div>
         <h3>Nenhum produto encontrado</h3>
         <p>Tente outro termo de busca</p>
@@ -214,16 +214,16 @@ function renderAllProducts(filter = '') {
 function productCard(p) {
   // BUG: preço negativo é exibido sem validação (produto id:11)
   return `
-    <div class="product-card" onclick="window.location='produto.html?id=${p.id}'">
+    <div data-testid="product-card-${p.id}" class="product-card" onclick="window.location='produto.html?id=${p.id}'">
       <div class="product-img">${p.emoji}</div>
       <div class="product-info">
-        <div class="product-cat">${p.category}</div>
-        <div class="product-name">${p.name}</div>
-        <div class="product-price">
+        <div data-testid="product-card-category" class="product-cat">${p.category}</div>
+        <div data-testid="product-card-name" class="product-name">${p.name}</div>
+        <div data-testid="product-card-price" class="product-price">
           R$ ${p.price.toFixed(2)}
           ${p.oldPrice ? `<span class="old-price">R$ ${p.oldPrice.toFixed(2)}</span>` : ''}
         </div>
-        <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id})">
+        <button data-testid="product-card-add-to-cart" class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id})">
           Adicionar ao Carrinho
         </button>
       </div>
@@ -241,34 +241,34 @@ function renderProductDetail() {
   const product = products.find(p => p.id === id);
 
   if (!product) {
-    container.innerHTML = '<div class="empty-state"><h3>Produto não encontrado</h3></div>';
+    container.innerHTML = '<div data-testid="product-not-found" class="empty-state"><h3>Produto não encontrado</h3></div>';
     return;
   }
 
   document.title = `${product.name} — QA na Marra Store`;
 
   container.innerHTML = `
-    <div class="product-detail">
+    <div data-testid="product-detail" class="product-detail">
       <div class="product-detail-img">${product.emoji}</div>
       <div class="product-detail-info">
-        <div class="product-cat">${product.category}</div>
-        <h1>${product.name}</h1>
-        <div class="product-detail-price">
+        <div data-testid="product-detail-category" class="product-cat">${product.category}</div>
+        <h1 data-testid="product-detail-name">${product.name}</h1>
+        <div data-testid="product-detail-price" class="product-detail-price">
           R$ ${product.price.toFixed(2)}
           ${product.oldPrice ? `<span style="font-size:1rem;color:var(--text2);text-decoration:line-through;margin-left:8px">R$ ${product.oldPrice.toFixed(2)}</span>` : ''}
         </div>
-        <p class="product-detail-desc">${product.description}</p>
+        <p data-testid="product-detail-description" class="product-detail-desc">${product.description}</p>
         <div class="qty-selector">
           <label>Quantidade:</label>
-          <input type="number" id="qtyInput" value="1" min="1" max="99"/>
+          <input data-testid="product-qty-input" type="number" id="qtyInput" value="1" min="1" max="99"/>
         </div>
-        <button class="btn-primary" style="width:100%" onclick="addToCart(${product.id}, parseInt(document.getElementById('qtyInput').value))">
+        <button data-testid="product-add-to-cart" class="btn-primary" style="width:100%" onclick="addToCart(${product.id}, parseInt(document.getElementById('qtyInput').value))">
           Adicionar ao Carrinho
         </button>
-        <button class="btn-ghost" style="width:100%;margin-top:10px" onclick="history.back()">
+        <button data-testid="product-back" class="btn-ghost" style="width:100%;margin-top:10px" onclick="history.back()">
           ← Voltar
         </button>
-        <div style="margin-top:16px;padding:12px;background:var(--bg3);border-radius:8px;font-size:13px;color:var(--text2)">
+        <div data-testid="product-stock-info" style="margin-top:16px;padding:12px;background:var(--bg3);border-radius:8px;font-size:13px;color:var(--text2)">
           ⭐ ${product.rating}/5.0 · 
           ${product.stock > 0 ? `✅ Em estoque (${product.stock} unid.)` : '❌ Sem estoque'}
         </div>
@@ -345,7 +345,7 @@ function renderCheckoutSummary() {
   container.innerHTML = `
     <h3>Resumo do Pedido</h3>
     ${cart.map(item => `
-      <div class="summary-item">
+      <div data-testid="checkout-summary-item" class="summary-item">
         <span>${item.emoji} ${item.name} x${item.qty}</span>
         <span>R$ ${(item.price * item.qty).toFixed(2)}</span>
       </div>
@@ -353,21 +353,21 @@ function renderCheckoutSummary() {
     <hr class="summary-divider"/>
     <div class="summary-item">
       <span>Subtotal</span>
-      <span>R$ ${subtotal.toFixed(2)}</span>
+      <span data-testid="checkout-subtotal">R$ ${subtotal.toFixed(2)}</span>
     </div>
     ${discount > 0 ? `
       <div class="summary-item" style="color:var(--accent)">
         <span>Desconto</span>
-        <span>- R$ ${discount.toFixed(2)}</span>
+        <span data-testid="checkout-discount">- R$ ${discount.toFixed(2)}</span>
       </div>
     ` : ''}
     <div class="summary-item">
       <span>Frete</span>
-      <span>${shipping === 0 ? 'Grátis' : 'R$ ' + shipping.toFixed(2)}</span>
+      <span data-testid="checkout-shipping">${shipping === 0 ? 'Grátis' : 'R$ ' + shipping.toFixed(2)}</span>
     </div>
     <div class="summary-total">
       <span>Total</span>
-      <span>R$ ${total.toFixed(2)}</span>
+      <span data-testid="checkout-total">R$ ${total.toFixed(2)}</span>
     </div>
   `;
 }
@@ -425,7 +425,7 @@ function renderAdminDashboard() {
   const tbody = document.getElementById('recentOrders');
   if (tbody) {
     tbody.innerHTML = orders.slice(-5).reverse().map(o => `
-      <tr>
+      <tr data-testid="admin-recent-order-row">
         <td><strong>${o.id}</strong></td>
         <td>${o.user}</td>
         <td>${o.date}</td>
@@ -437,7 +437,7 @@ function renderAdminDashboard() {
           }">${o.status}</span>
         </td>
         <td>
-          <button class="btn-sm btn-edit">Ver</button>
+          <button data-testid="admin-recent-order-view" class="btn-sm btn-edit">Ver</button>
         </td>
       </tr>
     `).join('');
@@ -450,7 +450,7 @@ function renderAdminProducts() {
   if (!tbody) return;
 
   tbody.innerHTML = products.map(p => `
-    <tr>
+    <tr data-testid="admin-product-row-${p.id}">
       <td>${p.id}</td>
       <td>${p.emoji} ${p.name}</td>
       <td>${p.category}</td>
@@ -459,8 +459,8 @@ function renderAdminProducts() {
       </td>
       <td>${p.stock}</td>
       <td>
-        <button class="btn-sm btn-edit" onclick="editProduct(${p.id})">Editar</button>
-        <button class="btn-sm btn-delete" onclick="deleteProduct(${p.id})">Excluir</button>
+        <button data-testid="admin-product-edit" class="btn-sm btn-edit" onclick="editProduct(${p.id})">Editar</button>
+        <button data-testid="admin-product-delete" class="btn-sm btn-delete" onclick="deleteProduct(${p.id})">Excluir</button>
       </td>
     </tr>
   `).join('');
@@ -486,13 +486,13 @@ function renderAdminOrders() {
   if (!tbody) return;
 
   tbody.innerHTML = orders.map(o => `
-    <tr>
+    <tr data-testid="admin-order-row-${o.id}">
       <td><strong>${o.id}</strong></td>
       <td>${o.user}</td>
       <td>${o.date}</td>
       <td>R$ ${o.total.toFixed(2)}</td>
       <td>
-        <select onchange="updateOrderStatus('${o.id}', this.value)"
+        <select data-testid="admin-order-status-select" onchange="updateOrderStatus('${o.id}', this.value)"
           style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:4px;font-size:12px">
           <option value="processando" ${o.status==='processando'?'selected':''}>Processando</option>
           <option value="enviado" ${o.status==='enviado'?'selected':''}>Enviado</option>
@@ -522,6 +522,7 @@ function showToast(msg) {
     toast = document.createElement('div');
     toast.id = 'toast';
     toast.className = 'toast';
+    toast.setAttribute('data-testid', 'toast');
     document.body.appendChild(toast);
   }
   toast.textContent = msg;
@@ -541,7 +542,7 @@ function renderUserOrders() {
 
   if (userOrders.length === 0) {
     container.innerHTML = `
-      <div class="empty-state">
+      <div data-testid="orders-empty" class="empty-state">
         <div class="empty-icon">📦</div>
         <h3>Nenhum pedido encontrado</h3>
         <p>Você ainda não fez nenhum pedido</p>
@@ -551,19 +552,19 @@ function renderUserOrders() {
   }
 
   container.innerHTML = userOrders.map(o => `
-    <div class="order-card">
+    <div data-testid="order-card-${o.id}" class="order-card">
       <div class="order-header">
-        <span class="order-id">${o.id}</span>
-        <span class="badge ${
+        <span data-testid="order-id" class="order-id">${o.id}</span>
+        <span data-testid="order-status" class="badge ${
           o.status === 'entregue' ? 'badge-green' :
           o.status === 'cancelado' ? 'badge-red' : 'badge-yellow'
         }">${o.status}</span>
-        <span class="order-total">R$ ${o.total.toFixed(2)}</span>
+        <span data-testid="order-total" class="order-total">R$ ${o.total.toFixed(2)}</span>
       </div>
-      <div class="order-items">
+      <div data-testid="order-items" class="order-items">
         ${o.items.map(i => `${i.name} x${i.qty}`).join(', ')}
       </div>
-      <div style="margin-top:8px;font-size:12px;color:var(--text2)">Data: ${o.date}</div>
+      <div data-testid="order-date" style="margin-top:8px;font-size:12px;color:var(--text2)">Data: ${o.date}</div>
     </div>
   `).join('');
 }

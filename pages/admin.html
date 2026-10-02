@@ -14,36 +14,36 @@
   <aside class="admin-sidebar">
     <a href="index.html" class="logo">QA <span>na Marra</span></a>
     <nav class="admin-nav">
-      <a href="admin.html" class="active" onclick="showSection('dashboard')">📊 Dashboard</a>
-      <a href="#" onclick="showSection('products')">📦 Produtos</a>
-      <a href="#" onclick="showSection('orders')">🧾 Pedidos</a>
-      <a href="#" onclick="showSection('users')">👥 Usuários</a>
-      <a href="index.html" style="margin-top:auto;color:var(--accent2)">← Voltar à loja</a>
+      <a data-testid="admin-nav-dashboard" href="admin.html" class="active" onclick="showSection('dashboard')">📊 Dashboard</a>
+      <a data-testid="admin-nav-products" href="#" onclick="showSection('products')">📦 Produtos</a>
+      <a data-testid="admin-nav-orders" href="#" onclick="showSection('orders')">🧾 Pedidos</a>
+      <a data-testid="admin-nav-users" href="#" onclick="showSection('users')">👥 Usuários</a>
+      <a data-testid="admin-nav-back-to-store" href="index.html" style="margin-top:auto;color:var(--accent2)">← Voltar à loja</a>
     </nav>
   </aside>
 
   <main class="admin-content">
 
     <!-- DASHBOARD -->
-    <div id="sectionDashboard">
+    <div data-testid="admin-section-dashboard" id="sectionDashboard">
       <h1>Dashboard</h1>
 
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-value" id="statOrders">-</div>
+          <div data-testid="stat-orders" class="stat-value" id="statOrders">-</div>
           <div class="stat-label">Total de Pedidos</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="statProducts">-</div>
+          <div data-testid="stat-products" class="stat-value" id="statProducts">-</div>
           <div class="stat-label">Produtos Cadastrados</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="statUsers">-</div>
+          <div data-testid="stat-users" class="stat-value" id="statUsers">-</div>
           <div class="stat-label">Usuários</div>
         </div>
         <div class="stat-card">
           <!-- BUG: receita soma pedidos cancelados também -->
-          <div class="stat-value" id="statRevenue">-</div>
+          <div data-testid="stat-revenue" class="stat-value" id="statRevenue">-</div>
           <div class="stat-label">Receita Total</div>
         </div>
       </div>
@@ -60,15 +60,15 @@
             <th>Ações</th>
           </tr>
         </thead>
-        <tbody id="recentOrders"></tbody>
+        <tbody data-testid="admin-recent-orders" id="recentOrders"></tbody>
       </table>
     </div>
 
     <!-- PRODUTOS -->
-    <div id="sectionProducts" style="display:none">
+    <div data-testid="admin-section-products" id="sectionProducts" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
         <h1 style="margin:0">Produtos</h1>
-        <button class="btn-primary" onclick="document.getElementById('addProductModal').style.display='flex'">
+        <button data-testid="admin-add-product-btn" class="btn-primary" onclick="document.getElementById('addProductModal').style.display='flex'">
           + Adicionar Produto
         </button>
       </div>
@@ -84,12 +84,12 @@
             <th>Ações</th>
           </tr>
         </thead>
-        <tbody id="adminProductsList"></tbody>
+        <tbody data-testid="admin-products-list" id="adminProductsList"></tbody>
       </table>
     </div>
 
     <!-- PEDIDOS -->
-    <div id="sectionOrders" style="display:none">
+    <div data-testid="admin-section-orders" id="sectionOrders" style="display:none">
       <h1>Pedidos</h1>
       <table class="admin-table">
         <thead>
@@ -101,12 +101,12 @@
             <th>Status</th>
           </tr>
         </thead>
-        <tbody id="adminOrdersList"></tbody>
+        <tbody data-testid="admin-orders-list" id="adminOrdersList"></tbody>
       </table>
     </div>
 
     <!-- USUÁRIOS -->
-    <div id="sectionUsers" style="display:none">
+    <div data-testid="admin-section-users" id="sectionUsers" style="display:none">
       <h1>Usuários</h1>
       <!-- BUG de segurança: exibe senhas dos usuários em texto claro -->
       <table class="admin-table">
@@ -118,7 +118,7 @@
             <th>Perfil</th>
           </tr>
         </thead>
-        <tbody id="adminUsersList"></tbody>
+        <tbody data-testid="admin-users-list" id="adminUsersList"></tbody>
       </table>
     </div>
 
@@ -126,33 +126,33 @@
 </div>
 
 <!-- Modal Editar Produto -->
-<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
+<div data-testid="edit-product-modal" id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
   <div class="form-card" style="max-width:480px;width:100%">
     <h2>Editar Produto</h2>
     <p>BUG: campos não carregam os dados do produto selecionado</p>
-    <div class="form-group"><label>Nome</label><input type="text" placeholder="Nome do produto"/></div>
+    <div class="form-group"><label>Nome</label><input data-testid="edit-product-name" type="text" placeholder="Nome do produto"/></div>
     <div class="form-group"><label>Preço</label>
       <!-- BUG: aceita preço negativo -->
-      <input type="number" placeholder="Preço (pode ser negativo)"/>
+      <input data-testid="edit-product-price" type="number" placeholder="Preço (pode ser negativo)"/>
     </div>
-    <div class="form-group"><label>Estoque</label><input type="number" placeholder="Qtd em estoque"/></div>
+    <div class="form-group"><label>Estoque</label><input data-testid="edit-product-stock" type="number" placeholder="Qtd em estoque"/></div>
     <div style="display:flex;gap:10px;margin-top:16px">
-      <button class="btn-primary" style="flex:1" onclick="showToast('Salvo! (bug: nada foi realmente salvo)')">Salvar</button>
-      <button class="btn-ghost" style="flex:1" onclick="document.getElementById('editModal').style.display='none'">Cancelar</button>
+      <button data-testid="edit-product-save" class="btn-primary" style="flex:1" onclick="showToast('Salvo! (bug: nada foi realmente salvo)')">Salvar</button>
+      <button data-testid="edit-product-cancel" class="btn-ghost" style="flex:1" onclick="document.getElementById('editModal').style.display='none'">Cancelar</button>
     </div>
   </div>
 </div>
 
 <!-- Modal Adicionar Produto -->
-<div id="addProductModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
+<div data-testid="add-product-modal" id="addProductModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:200">
   <div class="form-card" style="max-width:480px;width:100%">
     <h2>Novo Produto</h2>
-    <div class="form-group"><label>Nome</label><input type="text" id="newName" placeholder="Nome do produto"/></div>
-    <div class="form-group"><label>Preço</label><input type="number" id="newPrice" placeholder="0.00"/></div>
-    <div class="form-group"><label>Estoque</label><input type="number" id="newStock" placeholder="0"/></div>
+    <div class="form-group"><label>Nome</label><input data-testid="add-product-name" type="text" id="newName" placeholder="Nome do produto"/></div>
+    <div class="form-group"><label>Preço</label><input data-testid="add-product-price" type="number" id="newPrice" placeholder="0.00"/></div>
+    <div class="form-group"><label>Estoque</label><input data-testid="add-product-stock" type="number" id="newStock" placeholder="0"/></div>
     <div class="form-group">
       <label>Categoria</label>
-      <select id="newCat" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
+      <select data-testid="add-product-category" id="newCat" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--text);width:100%;font-size:14px">
         <option value="eletronicos">Eletrônicos</option>
         <option value="roupas">Roupas</option>
         <option value="livros">Livros</option>
@@ -160,8 +160,8 @@
       </select>
     </div>
     <div style="display:flex;gap:10px;margin-top:16px">
-      <button class="btn-primary" style="flex:1" onclick="addNewProduct()">Adicionar</button>
-      <button class="btn-ghost" style="flex:1" onclick="document.getElementById('addProductModal').style.display='none'">Cancelar</button>
+      <button data-testid="add-product-submit" class="btn-primary" style="flex:1" onclick="addNewProduct()">Adicionar</button>
+      <button data-testid="add-product-cancel" class="btn-ghost" style="flex:1" onclick="document.getElementById('addProductModal').style.display='none'">Cancelar</button>
     </div>
   </div>
 </div>
@@ -195,11 +195,11 @@
     if (!tbody) return;
     // BUG: exibe senha em texto claro
     tbody.innerHTML = users.map(u => `
-      <tr>
-        <td>${u.name}</td>
-        <td>${u.email}</td>
-        <td style="color:var(--accent2)">${u.password}</td>
-        <td><span class="badge ${u.role === 'admin' ? 'badge-green' : 'badge-yellow'}">${u.role}</span></td>
+      <tr data-testid="admin-user-row">
+        <td data-testid="admin-user-name">${u.name}</td>
+        <td data-testid="admin-user-email">${u.email}</td>
+        <td data-testid="admin-user-password" style="color:var(--accent2)">${u.password}</td>
+        <td><span data-testid="admin-user-role" class="badge ${u.role === 'admin' ? 'badge-green' : 'badge-yellow'}">${u.role}</span></td>
       </tr>
     `).join('');
   }

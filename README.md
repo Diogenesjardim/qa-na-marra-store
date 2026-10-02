@@ -83,6 +83,7 @@ c:\files/
 
 - **ROTEIRO_TESTES_MANUAIS.md** - Guia passo a passo para realizar testes manuais
 - **GABARITO_BUGS_PROFESSOR.md** - Lista completa de bugs presentes no sistema (apenas para instrutores)
+- **SELETORES_AUTOMACAO.md** - Lista dos `data-testid` de cada página, para automação com qualquer framework
 
 ## 🎯 Objetivo do Projeto
 
