@@ -36,13 +36,11 @@
   </div>
 
   <!-- Barra de busca -->
-  <!-- BUG: busca não tem validação de input, aceita caracteres especiais e scripts -->
   <div class="search-bar">
     <input data-testid="search-input" type="text" id="searchInput" placeholder="Buscar produtos... (ex: notebook, livro, camiseta)"/>
     <button data-testid="search-submit" onclick="doSearch()">Buscar</button>
   </div>
 
-  <!-- BUG: ordenação existe mas não funciona (nenhum dos critérios ordena de fato) -->
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
     <span data-testid="product-count" id="productCount" style="font-size:13px;color:var(--text2)"></span>
     <select data-testid="sort-select" id="sortSelect" onchange="doSearch()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:13px">
@@ -88,7 +86,6 @@
     const filter = document.getElementById('searchInput').value;
     renderAllProducts(filter);
 
-    // Atualiza contagem (mas não aplica ordenação - bug proposital)
     const products = getProducts();
     document.getElementById('productCount').textContent =
       `${document.querySelectorAll('.product-card').length} produtos encontrados`;

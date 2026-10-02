@@ -24,8 +24,6 @@ function addToCart(productId, qty = 1) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
 
-  // BUG: não valida se produto está sem estoque (stock === 0)
-  // O produto Mouse Gamer (id:12) tem stock=0 mas pode ser adicionado ao carrinho
 
   const cart = getCart();
   const existingIndex = cart.findIndex(item => item.id === productId);
@@ -67,12 +65,9 @@ function calcCartTotal() {
   const cart = getCart();
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   
-  // BUG PROPOSITAL: o desconto é calculado errado
-  // Deveria aplicar 10% quando subtotal > R$500
-  // Mas está subtraindo o valor fixo de 50 em vez de 10%
   let discount = 0;
   if (subtotal > 500) {
-    discount = 50; // BUG: deveria ser subtotal * 0.10
+    discount = 50;
   }
 
   const shipping = subtotal > 200 ? 0 : 19.90;
@@ -189,7 +184,6 @@ function renderAllProducts(filter = '') {
   if (cat) products = products.filter(p => p.category === cat);
 
   // Filtro por busca
-  // BUG: busca não é sanitizada, aceita qualquer input
   if (filter) {
     products = products.filter(p =>
       p.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -212,7 +206,6 @@ function renderAllProducts(filter = '') {
 }
 
 function productCard(p) {
-  // BUG: preço negativo é exibido sem validação (produto id:11)
   return `
     <div data-testid="product-card-${p.id}" class="product-card" onclick="window.location='produto.html?id=${p.id}'">
       <div class="product-img">${p.emoji}</div>
@@ -280,10 +273,8 @@ function renderProductDetail() {
 // ------ AUTH ------
 
 function login(email, password) {
-  // BUG: aceita login com campos em branco (sem validação de required)
   const users = getUsers();
   
-  // BUG: comparação case-sensitive não normalizada
   const user = users.find(u => u.email === email && u.password === password);
   
   if (user) {
@@ -295,13 +286,10 @@ function login(email, password) {
 
 function logout() {
   localStorage.removeItem('qa_current_user');
-  // BUG: após logout não redireciona, apenas recarrega
   window.location.reload();
 }
 
 function register(name, email, password, confirm) {
-  // BUG: não valida se senha e confirmação são iguais
-  // Permite cadastro mesmo com senhas diferentes
 
   if (!name || !email) {
     return { success: false, error: 'Nome e e-mail são obrigatórios' };
@@ -316,7 +304,6 @@ function register(name, email, password, confirm) {
   users.push(newUser);
   localStorage.setItem('qa_users', JSON.stringify(users));
 
-  // BUG: após cadastro redireciona para página errada (vai pra home em vez de login)
   return { success: true };
 }
 
@@ -399,8 +386,6 @@ function finalizarPedido(dados) {
   localStorage.removeItem('qa_cart');
   updateCartCount();
 
-  // BUG de fluxo: redireciona para página de confirmação sem parâmetro do pedido
-  // A página de confirmação não consegue saber qual foi o pedido
   window.location.href = 'confirmacao.html';
 }
 
@@ -467,7 +452,6 @@ function renderAdminProducts() {
 }
 
 function deleteProduct(id) {
-  // BUG: exclui sem confirmação
   let products = getProducts();
   products = products.filter(p => p.id !== id);
   localStorage.setItem('qa_products', JSON.stringify(products));
@@ -476,7 +460,6 @@ function deleteProduct(id) {
 }
 
 function editProduct(id) {
-  // BUG: abre formulário mas não carrega os dados do produto (campo vazio)
   document.getElementById('editModal').style.display = 'flex';
 }
 
@@ -537,7 +520,6 @@ function renderUserOrders() {
   const user = getCurrentUser();
   const orders = getOrders();
 
-  // BUG: mostra TODOS os pedidos para qualquer usuário logado, sem filtrar por email
   const userOrders = user ? orders : [];
 
   if (userOrders.length === 0) {

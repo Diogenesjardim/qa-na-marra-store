@@ -42,11 +42,9 @@
 
     <div class="form-group">
       <label>Confirmar Senha</label>
-      <!-- BUG: confirmar senha existe mas o JS não valida se são iguais -->
       <input data-testid="register-confirm-password" type="password" id="regConfirm" placeholder="Repita a senha"/>
     </div>
 
-    <!-- BUG: CPF aceita qualquer texto, sem validação de formato -->
     <div class="form-group">
       <label>CPF</label>
       <input data-testid="register-cpf" type="text" id="regCpf" placeholder="000.000.000-00"/>
@@ -81,7 +79,6 @@
 
     if (result.success) {
       successEl.style.display = 'block';
-      // BUG: redireciona para home em vez de login
       setTimeout(() => window.location.href = 'index.html', 1500);
     } else {
       errorEl.textContent = result.error;

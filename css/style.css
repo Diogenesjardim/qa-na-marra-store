@@ -317,13 +317,13 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-add-cart:hover { opacity: 0.85; }
 
-/* PROMO BANNER - com bugs visuais propositais */
+/* PROMO BANNER */
 .promo-banner {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 48px;
-  overflow: hidden; /* bug: botão vai ficar cortado */
+  overflow: hidden;
 }
 .promo-inner {
   max-width: 1200px;
